@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ ivy-tasks.xml
+ Ant targets for Ivy Dependency Manager
+ Version 2.0 1 Sep 2010
+ Copyright (C) 2010  ESA - ESAC - Madrid, Spain
+-->
+<project default="ivy-install-ivy-jars" basedir="." xmlns:ivy="antlib:org.apache.ivy.ant">
+	<!-- ========================================================================= -->
+	<!--        Ivy Installation Targets      									   -->
+	<!-- ========================================================================= -->
+	<target name="download-properties">
+		<tstamp>
+			<format property="timestamp" pattern="yyyyMMddhhmmss" />
+		</tstamp>
+		<echo message="Updating (if needed) ivy properties..." />
+		<property name="ivy.properties.file" value="ivy-tasks.properties" />
+		<get src="http://satscm.esac.esa.int/ivy/${ivy.properties.file}" dest="${ivy.properties.file}" usetimestamp="true" />
+		<property file="${ivy.properties.file}" />
+		<echo message="Updating (if needed) ivy tasks xml file..." />
+		<get src="http://satscm.esac.esa.int/ivy/ivy-tasks.xml" dest="ivy-tasks.xml" usetimestamp="true" />		
+	</target>
+	<target name="download-ivy" depends="download-properties">
+		<mkdir dir="${ivy.jar.dir}" />
+		<echo message="Installing ivy and ssh support..." />
+		<get src="${http.ivy.jar}" dest="${ivy.jar.file}" usetimestamp="true" />
+		<get src="${http.jsch.jar}" dest="${jsch.jar.file}" usetimestamp="true" />
+		<get src="${http.svnant.jar}" dest="${svnant.jar.file}" usetimestamp="true" />
+		<get src="${http.svnclientadapter.jar}" dest="${svnclientadapter.jar.file}" usetimestamp="true" />
+	</target>
+	<target name="ivy-install-ivy-jars" depends="download-ivy" description="--> Install ivy">
+		<echo message="Loading ivy jar..." />
+		<path id="ivy.lib.path">
+			<fileset dir="${ivy.jar.dir}" includes="*.jar" />
+		</path>
+		<echo message="Loading ivy tags..." />
+		<taskdef resource="org/apache/ivy/ant/antlib.xml" uri="antlib:org.apache.ivy.ant" classpathref="ivy.lib.path" />
+		<echo message="Loading svn-ant tags..." />
+		<taskdef resource="org/tigris/subversion/svnant/svnantlib.xml" classpathref="ivy.lib.path" />
+	</target>
+	<target name="ivy-clean-jars" description="--> Clean the ivy installation">
+		<delete dir="${ivy.jar.dir}" />
+		<delete dir="lib" />
+	</target>
+	<!-- ========================================================================= -->
+	<!--        Svn Functionality Targets           							   -->
+	<!-- ========================================================================= -->
+	<target name="-svn-tag" depends="-svn-commit">
+		<echo message="Tag latest changes as ${artifact.name}..." />
+		<svn javahl="false">
+			<info target="." />
+		</svn>
+		<echo message="Path [${svn.info.path}], url [${svn.info.url}], tstamp[${timestamp}] " />
+		<echo message="Removing nested paths..." />
+		<path id="svn.destinationUrl" location="${svn.info.url}" />
+		<pathconvert property="svn.originUrl" refid="svn.destinationUrl">
+			<mapper>
+				<chainedmapper>
+					<filtermapper>
+						<replacestring from="${basedir}/" to=""/>
+						<replacestring from="http:/" to="http://"/>
+						<replacestring from="https:/" to="https://"/>
+					</filtermapper>
+					<regexpmapper from="^(.*)/trunk/(.*)" to="\1/tags/${software.name}-${software.version}_${timestamp}"/>					
+				</chainedmapper>
+			</mapper>
+		</pathconvert>
+		<echo message="Destination url [${svn.originUrl}]" />		
+		<input addproperty="tagSelectedDestinationUrl" defaultvalue="${svn.originUrl}" 
+				message="Please enter destination url for tag (or select default):"  />			
+		<svn javahl="false">
+			<copy 	srcUrl="${svn.info.url}" 
+				destUrl="${tagSelectedDestinationUrl}"
+				message="Tagging software module: [${software.name}-${software.version}]"/>
+		</svn>		
+	</target>
+	<target name="-load-artifact-name">
+		<fileset dir="${dist.dir}" id="artifact.folder.contents">
+			<include name="*" />
+		</fileset>
+		<property name="artifact.name" refid="artifact.folder.contents" />
+		<echo message="${artifact.name}" />
+	</target>
+	<target name="-svn-commit" depends="ivy-install-ivy-jars, -load-artifact-name">
+		<echo message="Commit current changes to svn repository..." />
+		<svn javahl="false">
+			<commit message="Automatic svn commit after uploading [${artifact.name}] to Ivy" dir="."/>
+		</svn>
+	</target>
+	<!-- ========================================================================= -->
+	<!--        Ivy Functionality Targets           							   -->
+	<!-- ========================================================================= -->
+	<target name="ivy-settings" depends="ivy-install-ivy-jars">
+		<echo message="Loading ivy settings from remote repository..." />
+		<ivy:settings url="${http.ivy}/ivysettings.xml" />
+	</target>
+	<target name="ivy-resolve" depends="ivy-settings">
+		<echo message="Resolving ivy dependencies and moving files to ivy cache..." />
+		<ivy:resolve />
+	</target>
+	<target name="ivy-retrieve" description="--> Retrieve dependencies with Ivy" depends="ivy-resolve">
+		<echo message="Moving dependencies to project library folder..." />
+		<ivy:retrieve />
+	</target>
+	<target name="ivy-clean-cache" description="--> Clean the ivy cache" depends="ivy-settings">
+		<echo message="Cleaning ivy cache..." />
+		<ivy:cleancache />
+	</target>
+	<target name="ivy-report" depends="ivy-retrieve" description="--> Generates a report of dependencies">
+		<echo message="Generating ivy dependencies report..." />
+		<ivy:report todir="${build.dir}/${ivyReport.dir}" />
+	</target>
+	<target name="ivy-deliver" depends="ivy-resolve">
+		<echo message="Creating ivy xml file prior to publishing..." />
+		<ivy:deliver deliverpattern="${dist.dir}/${artifact.pattern}" />
+	</target>
+	<target name="ivy-publish-artifacts" description="Upload distribution files to repository" depends="ivy-deliver">
+		<echo message="Uploading distribution files to repository..." />
+		<ivy:publish resolver="${publish.resolver}" artifactspattern="${dist.dir}/${artifact.pattern}" overwrite="${publish.overwrite}" />
+	</target>
+	<target name="ivy-publish" description="--> Upload distribution files to repository plus commit and tag contents" 
+			depends="ivy-publish-artifacts">
+			<!--
+			depends="ivy-publish-artifacts, -svn-tag">
+			-->
+	</target>
+</project>

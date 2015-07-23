@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ivy-module version="2.0" xmlns:e="http://ant.apache.org/ivy/extra">
+
+	<info organisation="esa" module="esavo-uws" revision="1.0.8" 
+		status="release" e:project="esavo" e:layer="common" 
+		e:component="esavo-uws">
+		<description homepage="http://satscm.esac.esa.int/redmine/projects/gaiacs">UWS Service</description>
+	</info>
+	<configurations/>
+	<publications>
+	 	<artifact name="esavo-uws" type="jar" ext="jar"/>
+	</publications>
+	<dependencies>
+		<!-- Third party -->
+	 	<dependency org="junit" name="junit" rev="4.5" force="false" transitive="true"/>
+		<dependency org="javax.servlet" name="servlet-api" rev="2.5" force="false" transitive="false"/> 
+		<dependency org="org.apache.tomcat" name="jdbc" rev="7.0.39" force="true" transitive="false" />
+		<dependency org="postgresql" name="postgresql" rev="9.3-1100.jdbc4" force="true" transitive="false" />
+		<dependency org="servlets.com" name="cos" rev="26Dec2008" force="false" transitive="false"/>
+	</dependencies>
+</ivy-module>

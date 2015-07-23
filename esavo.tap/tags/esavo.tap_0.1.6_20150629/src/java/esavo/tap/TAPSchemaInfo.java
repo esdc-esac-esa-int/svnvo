@@ -1,0 +1,297 @@
+package esavo.tap;
+
+/**
+ * This class returns the real tables or the views associated to TAP_SCHEMA tables.
+ * @author juan.carlos.segovia@sciops.esa.int
+ *
+ */
+public class TAPSchemaInfo {
+
+	private String tapSchemaName;
+
+	private String tapSchemasTableName;
+	private String tapTablesTableName;
+	private String tapColumnsTableName;
+	private String tapKeysTableName;
+	private String tapKeyColumnsTableName;
+	private String tapFunctionsTableName;
+	private String tapFunctionsArgumentsTableName;
+
+	private String tapSchemasViewName;
+	private String tapTablesViewName;
+	private String tapColumnsViewName;
+	private String tapKeysViewName;
+	private String tapKeyColumnsViewName;
+	private String tapFunctionsViewName;
+	private String tapFunctionsArgumentsViewName;
+
+	/**
+	 * Assigns default values for schema, tables and views.<br/>
+	 * <ul>
+	 * <li>Schema name: <code>tap_schema</code></li>
+	 * </ul>
+	 * Tables<br/>
+	 * <ul>
+	 * <li>'schemas' table name: <code>schemas</code></li>
+	 * <li>'tables' table name: <code>tables</code></li>
+	 * <li>'columns' table name: <code>columns</code></li>
+	 * <li>'keys' table name: <code>keys</code></li>
+	 * <li>'key_column' table name: <code>key_column</code></li>
+	 * </ul>
+	 * Views<br/>
+	 * <ul>
+	 * <li>'schemas' view name: <code>schemas</code></li>
+	 * <li>'tables' view name: <code>tables</code></li>
+	 * <li>'columns' view name: <code>columns</code></li>
+	 * <li>'keys' view name: <code>keys</code></li>
+	 * <li>'key_column' view name: <code>key_column</code></li>
+	 * </ul>
+	 * 
+	 */
+	public TAPSchemaInfo() {
+		// Schema name
+		tapSchemaName = "tap_schema";
+		
+		// Tables
+		tapSchemasTableName = "schemas";
+		tapTablesTableName = "tables";
+		tapColumnsTableName = "columns";
+		tapKeysTableName = "keys";
+		tapKeyColumnsTableName = "key_columns";
+		tapFunctionsTableName = "functions";
+		tapFunctionsArgumentsTableName = "functions_arguments";
+
+		//Views
+		tapSchemasViewName = tapSchemasTableName;
+		tapTablesViewName = tapTablesTableName;
+		tapColumnsViewName = tapColumnsTableName;
+		tapKeysViewName = tapKeysTableName;
+		tapKeyColumnsViewName = tapKeyColumnsTableName;
+		tapFunctionsViewName = tapFunctionsTableName;
+		tapFunctionsArgumentsViewName = tapFunctionsArgumentsTableName;
+	}
+
+	/**
+	 * @return the tapSchemaName
+	 */
+	public String getTapSchemaName() {
+		return tapSchemaName;
+	}
+
+	/**
+	 * @param tapSchemaName
+	 *            the tapSchemaName to set
+	 */
+	public void setTapSchemaName(String tapSchemaName) {
+		this.tapSchemaName = tapSchemaName;
+	}
+
+	/**
+	 * @return the tapSchemasTableName
+	 */
+	public String getTapSchemasTableName() {
+		return tapSchemasTableName;
+	}
+
+	/**
+	 * @param tapSchemasTableName
+	 *            the tapSchemasTableName to set
+	 */
+	public void setTapSchemasTableName(String tapSchemasTableName) {
+		this.tapSchemasTableName = tapSchemasTableName;
+	}
+
+	/**
+	 * @return the tapTablesTableName
+	 */
+	public String getTapTablesTableName() {
+		return tapTablesTableName;
+	}
+
+	/**
+	 * @param tapTablesTableName
+	 *            the tapTablesTableName to set
+	 */
+	public void setTapTablesTableName(String tapTablesTableName) {
+		this.tapTablesTableName = tapTablesTableName;
+	}
+
+	/**
+	 * @return the tapColumnsTableName
+	 */
+	public String getTapColumnsTableName() {
+		return tapColumnsTableName;
+	}
+
+	/**
+	 * @param tapColumnsTableName
+	 *            the tapColumnsTableName to set
+	 */
+	public void setTapColumnsTableName(String tapColumnsTableName) {
+		this.tapColumnsTableName = tapColumnsTableName;
+	}
+
+	/**
+	 * @return the tapKeysTableName
+	 */
+	public String getTapKeysTableName() {
+		return tapKeysTableName;
+	}
+
+	/**
+	 * @param tapKeysTableName
+	 *            the tapKeysTableName to set
+	 */
+	public void setTapKeysTableName(String tapKeysTableName) {
+		this.tapKeysTableName = tapKeysTableName;
+	}
+
+	/**
+	 * @return the tapKeyColumnsTableName
+	 */
+	public String getTapKeyColumnsTableName() {
+		return tapKeyColumnsTableName;
+	}
+
+	/**
+	 * @param tapKeyColumnsTableName
+	 *            the tapKeyColumnsTableName to set
+	 */
+	public void setTapKeyColumnsTableName(String tapKeyColumnsTableName) {
+		this.tapKeyColumnsTableName = tapKeyColumnsTableName;
+	}
+
+	/**
+	 * @return the tapSchemasViewName
+	 */
+	public String getTapSchemasViewName() {
+		return tapSchemasViewName;
+	}
+
+	/**
+	 * @param tapSchemasViewName
+	 *            the tapSchemasViewName to set
+	 */
+	public void setTapSchemasViewName(String tapSchemasViewName) {
+		this.tapSchemasViewName = tapSchemasViewName;
+	}
+
+	/**
+	 * @return the tapTablesViewName
+	 */
+	public String getTapTablesViewName() {
+		return tapTablesViewName;
+	}
+
+	/**
+	 * @param tapTablesViewName
+	 *            the tapTablesViewName to set
+	 */
+	public void setTapTablesViewName(String tapTablesViewName) {
+		this.tapTablesViewName = tapTablesViewName;
+	}
+
+	/**
+	 * @return the tapColumnsViewName
+	 */
+	public String getTapColumnsViewName() {
+		return tapColumnsViewName;
+	}
+
+	/**
+	 * @param tapColumnsViewName
+	 *            the tapColumnsViewName to set
+	 */
+	public void setTapColumnsViewName(String tapColumnsViewName) {
+		this.tapColumnsViewName = tapColumnsViewName;
+	}
+
+	/**
+	 * @return the tapKeysViewName
+	 */
+	public String getTapKeysViewName() {
+		return tapKeysViewName;
+	}
+
+	/**
+	 * @param tapKeysViewName
+	 *            the tapKeysViewName to set
+	 */
+	public void setTapKeysViewName(String tapKeysViewName) {
+		this.tapKeysViewName = tapKeysViewName;
+	}
+
+	/**
+	 * @return the tapKeyColumnsViewName
+	 */
+	public String getTapKeyColumnsViewName() {
+		return tapKeyColumnsViewName;
+	}
+
+	/**
+	 * @param tapKeyColumnsViewName
+	 *            the tapKeyColumnsViewName to set
+	 */
+	public void setTapKeyColumnsViewName(String tapKeyColumnsViewName) {
+		this.tapKeyColumnsViewName = tapKeyColumnsViewName;
+	}
+
+	/**
+	 * @return the tapFunctionsTableName
+	 */
+	public String getTapFunctionsTableName() {
+		return tapFunctionsTableName;
+	}
+
+	/**
+	 * @param tapFunctionsTableName the tapFunctionsTableName to set
+	 */
+	public void setTapFunctionsTableName(String tapFunctionsTableName) {
+		this.tapFunctionsTableName = tapFunctionsTableName;
+	}
+
+	/**
+	 * @return the tapFunctionsArgumentsTableName
+	 */
+	public String getTapFunctionsArgumentsTableName() {
+		return tapFunctionsArgumentsTableName;
+	}
+
+	/**
+	 * @param tapFunctionsArgumentsTableName the tapFunctionsArgumentsTableName to set
+	 */
+	public void setTapFunctionsArgumentsTableName(
+			String tapFunctionsArgumentsTableName) {
+		this.tapFunctionsArgumentsTableName = tapFunctionsArgumentsTableName;
+	}
+
+	/**
+	 * @return the tapFunctionsViewName
+	 */
+	public String getTapFunctionsViewName() {
+		return tapFunctionsViewName;
+	}
+
+	/**
+	 * @param tapFunctionsViewName the tapFunctionsViewName to set
+	 */
+	public void setTapFunctionsViewName(String tapFunctionsViewName) {
+		this.tapFunctionsViewName = tapFunctionsViewName;
+	}
+
+	/**
+	 * @return the tapFunctionsArgumentsViewName
+	 */
+	public String getTapFunctionsArgumentsViewName() {
+		return tapFunctionsArgumentsViewName;
+	}
+
+	/**
+	 * @param tapFunctionsArgumentsViewName the tapFunctionsArgumentsViewName to set
+	 */
+	public void setTapFunctionsArgumentsViewName(
+			String tapFunctionsArgumentsViewName) {
+		this.tapFunctionsArgumentsViewName = tapFunctionsArgumentsViewName;
+	}
+
+}

@@ -1,0 +1,56 @@
+# build.properties.defaults
+#
+# esavo-tap
+#
+
+### software name & version
+software.name=esavo-tap
+software.version=1.0.10
+
+### compiler flags & options
+javac.source=1.6
+javac.target=1.6
+javac.compiler=javac1.6
+
+javac.nowarn=false
+javac.debug=true
+javac.deprec=true
+
+### archiver flags & options
+war.compress=true
+war.basedir=web
+war.update=false
+
+### junit flags & options
+junit.summary=true
+junit.output=false
+junit.halt=false
+
+### javadoc flags & options
+javadoc.packages=*
+javadoc.access=protected
+javadoc.fail=true
+
+### checkstyle flags & options
+checkstyle.config=../../setup/sun_checks.xml
+checkstyle.fail=false
+checkstyle.style=../../setup/checkstyle.xsl
+
+### conf & java directories
+conf.dir=src/conf
+java.dir=src/java
+
+setup.dir=setup
+
+### build & dist directories
+build.dir=build
+build.classes.dir=${build.dir}/classes
+build.javadoc.dir=${build.dir}/javadoc
+build.testclass.dir=${build.dir}/testclass
+build.jureport.dir=${build.dir}/jureport
+build.csreport.dir=${build.dir}/csreport
+
+dist.dir=dist
+dist.jar.file=${dist.dir}/${software.name}-${software.version}.jar
+final.dir=final
+lib.dir=lib

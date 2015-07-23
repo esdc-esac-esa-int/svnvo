@@ -1,0 +1,69 @@
+# build.properties.int
+#
+# uws application
+#
+
+### Server installation params
+server.host=geadev.esac.esa.int
+server.port=80
+server.user=geaops
+server.instdir=/home/geaops/gaiaComponents
+
+uws.app.id=I
+uws.app.storage_dir=/gaia/tests/uws_storage
+uws_max_running_jobs=10
+
+#Uploads enabled
+uws.upload.enabled=true
+
+#in bytes (aprox: 10 MB)
+uws.upload.max_size=10000000
+
+#Default quota database in bytes (100 MB)
+uws.db.quota=104857600
+#Default quota files in bytes (aprox 1GB)
+uws.files.quota=1048576000
+
+#exec duration limit (0 no limit)
+uws.exec_duration_limit=0
+
+#Database
+uws.db.usage=true
+uws.jdbc.dbServer=gacsdb01.n1data.lan
+uws.jdbc.dbPort=8300
+#uws.jdbc.dbName=gacs
+uws.jdbc.dbName=gacs_dev
+uws.jdbc.dbOwner=postgres
+#this parameter will be asked by ant
+uws.jdbc.dbPwd=
+
+#Fixed base url
+#Use this to avoid HttpServlertRequest parsing to obtain protocol, host and port
+#uws.fixed_base_url=http://geadev.esac.esa.int
+#Nothing
+uws.fixed_base_url=
+
+#Jobs Removal	
+#Jobs removal check time (-1 to disable), by default: 24h (= 24*60*60*1000=86400000)
+uws.jobs_removal_check_time=86400000
+#Job removal comparison time (to remove old jobs), by default: 3 days (= 3*24*60*60*1000=259200000)
+uws.jobs_delta_destruction_time=259200000
+#orphan jobs and old empty directories comparison time: 30 days (= 30*24*60*60*1000=259200000)
+uws.old_empty_dirs_cmp_time=2592000000
+
+#Events removal
+#Events removal check time (-1 to disable), by default: 24h (= 24*60*60*1000=86400000)
+uws.events_removal_check_time=86400000
+#Events removal comparison time (to remove old events), by default: 1 day (= 24*60*60*1000=86400000)
+uws.events_delta_destruction_time=86400000
+
+#Notifications removal
+#Notifications removal check time (-1 to disable), by default: 24h (= 24*60*60*1000=86400000)
+uws.notifications_removal_check_time=86400000
+#Notifications removal comparison time (to remove old notifications). By default: 1 month (= 30*24*60*60*1000=2592000000)
+uws.notifications_delta_destruction_time=2592000000
+
+#uws ldap
+#uws.ldap.server=ldap://ldap.sciops.esa.int:389
+#uws.ldap.search_base=ou=People,o=esa.nl
+#uws.ldap.usr=cn=Euclid Applications Admin RO,ou=Special Users,o=esa.nl

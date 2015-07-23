@@ -1,0 +1,13 @@
+This software can be used as a library or as a web application (servlet).
+
+To use the software you must create the required database tables: execute file setup/uws_tables.sql
+
+You must set the configuration variables also. Edit build.properties.[dev|int|local] file.
+(NOTE: uws.app.id is a string that will be added to any job identifier: choose a short identifier.)
+
+To build a library, use 'dist' ant command.
+(You may use 'test' ant command also).
+
+To build a web application, use 'deploy_app', it will generate a 'WebContent' folder with all the required files.
+(You may use 'test_app' ant command also).
+
