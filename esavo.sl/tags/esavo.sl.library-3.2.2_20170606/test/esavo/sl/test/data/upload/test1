@@ -1,0 +1,28 @@
+<VOTABLE version="1.2" xmlns="http://www.ivoa.net/xml/VOTable/v1.2">
+<RESOURCE type="results">
+<INFO name='QUERY_STATUS' value='OK'/>
+<TABLE>
+<FIELD datatype="long" name="source_id" ucd="meta.record">
+<DESCRIPTION>source_id</DESCRIPTION>
+</FIELD>
+<FIELD datatype="double" name="alpha" ucd="pos.eq.ra;meta.main" unit="deg" utype="Char.SpatialAxis.Coverage.Location.Coord.Position2D.Value2.C1">
+<DESCRIPTION>alpha</DESCRIPTION>
+</FIELD>
+<FIELD datatype="double" name="delta" ucd="pos.eq.dec;meta.main" unit="deg" utype="Char.SpatialAxis.Coverage.Location.Coord.Position2D.Value2.C2">
+<DESCRIPTION>delta</DESCRIPTION>
+</FIELD>
+<DATA>
+<BINARY>
+<STREAM encoding='base64'>
+GAB54gAABARAcOy2XrnkMMA9tlcDW5ndGAB55gAABB1AcO0yRrGN38A9wZabYpus
+GAB52gAAA/BAcO4vr4j1NMA9rYhT0ebEGAB5WEAABBNAcO5mlt1tkcA94BgqI0ph
+GAB5WAgABBNAcO5mltztisA94BgqIJKcGAB5WBAABBNAcO5mlt3gQsA94BgqJdI2
+GAB5HIAABBlAcOxo6GEOQcA9p2aHqf8XGAB5EcAAA+xAcOyzZZoqJsA9tcosNBEO
+GAB5EYgAA+xAcOyzZasKnMA9tcosXSEMGAB5ERAAA+xAcOyzZSL85sA9tcorEmO5
+
+</STREAM>
+</BINARY>
+</DATA>
+</TABLE>
+</RESOURCE>
+</VOTABLE>

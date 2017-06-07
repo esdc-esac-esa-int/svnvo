@@ -1,0 +1,48 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+		xmlns:s="http://www.springframework.org/schema/security" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://www.springframework.org/schema/beans
+                  http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+                  http://www.springframework.org/schema/security
+                  http://www.springframework.org/schema/security/spring-security-4.0.xsd">
+
+    
+    <s:http>
+       	<s:csrf disabled="true"/>
+    	<s:headers>
+			<s:frame-options policy="SAMEORIGIN"/>
+			<s:hsts disabled="true"/>
+		</s:headers>
+    
+        <s:form-login 
+            login-processing-url="/login" 
+            authentication-success-handler-ref="loginSuccessHandler" 
+            authentication-failure-handler-ref="loginFailureHandler"/> 
+        <s:logout logout-url="/logout" invalidate-session="false" success-handler-ref="logoutSuccessHandler"/>
+    </s:http>
+
+    <bean id="loginSuccessHandler" class="esavo.sl.security.authentication.LoginSuccessHandler" />
+    <bean id="loginFailureHandler" class="esavo.sl.security.authentication.LoginFailureHandler" />
+    <bean id="logoutSuccessHandler" class="esavo.sl.security.authentication.LogoutSuccessHandler" />
+    
+      
+    <s:authentication-manager>
+      <s:authentication-provider>
+         <s:user-service>
+            <s:user name="admin" password="admin" authorities="ROLE_ADMIN"/>
+            <s:user name="user" password="user" authorities="ROLE_USER"/>
+         </s:user-service>
+      </s:authentication-provider>
+   	</s:authentication-manager>
+   	
+	<!-- Black magic to make sync/async threads work with springsecuirty 4.0 in command line  -->
+	<bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+		<property name="targetClass" value="org.springframework.security.core.context.SecurityContextHolder" />
+		<property name="targetMethod" value="setStrategyName" />
+		<property name="arguments">
+			<list>
+				<value>MODE_INHERITABLETHREADLOCAL</value>
+			</list>
+		</property>
+	</bean>
+   	
+</beans>   

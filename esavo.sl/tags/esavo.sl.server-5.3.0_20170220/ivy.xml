@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ivy-module version="2.0" xmlns:e="http://ant.apache.org/ivy/extra">
+
+	<info organisation="esa" module="esavo-sl-server" revision="${software.version}"
+		status="integration" e:project="esavo" e:layer="common" e:component="esavo-sl-server">
+		<description homepage="http://satscm.esac.esa.int/redmine/projects/esavo/sl-server">
+			esavo sl server
+		</description>
+	</info>
+	<configurations />
+	<publications>
+		<artifact name="esavo-sl-server" type="war" ext="war" />
+	</publications>
+	<dependencies>
+		
+		<!-- ESAVO -->
+		<dependency e:project="esavo" e:layer="common" e:component="esavo-sl" name="esavo-sl" rev="3.0.0" force="true" transitive="true" />
+
+	</dependencies>
+</ivy-module>

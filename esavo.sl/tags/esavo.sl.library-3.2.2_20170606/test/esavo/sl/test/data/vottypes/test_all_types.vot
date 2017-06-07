@@ -1,0 +1,464 @@
+<?xml version='1.0'?>
+<VOTABLE version="1.2" xmlns="http://www.ivoa.net/xml/VOTable/v1.2">
+<RESOURCE type="results">
+<INFO name='QUERY_STATUS' value='OK'/>
+<TABLE>
+
+<!-- boolean -->
+<FIELD datatype="boolean" name="boolean_type_no_as" ucd="meta.code">
+<DESCRIPTION>nt</DESCRIPTION>
+<VALUES null='true'/>
+</FIELD>
+<FIELD datatype="boolean" name="boolean_type_empty_as" ucd="meta.code" arraysize="">
+<DESCRIPTION>nt</DESCRIPTION>
+<VALUES null='true'/>
+</FIELD>
+<FIELD datatype="boolean" name="boolean_type_as_1" ucd="meta.code" arraysize="1">
+<DESCRIPTION>nt</DESCRIPTION>
+<VALUES null='true'/>
+</FIELD>
+<FIELD datatype="boolean" name="boolean_type_as_2" ucd="meta.code" arraysize="2">
+<DESCRIPTION>nt</DESCRIPTION>
+<VALUES null='true'/>
+</FIELD>
+<FIELD datatype="boolean" name="boolean_type_as_*" ucd="meta.code" arraysize="*">
+<DESCRIPTION>nt</DESCRIPTION>
+<VALUES null='true'/>
+</FIELD>
+<FIELD datatype="boolean" name="boolean_type_as_3*" ucd="meta.code" arraysize="3*">
+<DESCRIPTION>nt</DESCRIPTION>
+<VALUES null='true'/>
+</FIELD>
+
+<!-- short -->
+<FIELD datatype="short" name="short_type_no_as" ucd="meta.code">
+<DESCRIPTION>nt</DESCRIPTION>
+<VALUES null='-10'/>
+</FIELD>
+<FIELD datatype="short" name="short_type_empty_as" ucd="meta.code" arraysize="">
+<DESCRIPTION>nt</DESCRIPTION>
+<VALUES null='-10'/>
+</FIELD>
+<FIELD datatype="short" name="short_type_as_1" ucd="meta.code" arraysize="1">
+<DESCRIPTION>nt</DESCRIPTION>
+<VALUES null='-10'/>
+</FIELD>
+<FIELD datatype="short" name="short_type_as_2" ucd="meta.code" arraysize="2">
+<DESCRIPTION>nt</DESCRIPTION>
+<VALUES null='-10'/>
+</FIELD>
+<FIELD datatype="short" name="short_type_as_*" ucd="meta.code" arraysize="*">
+<DESCRIPTION>nt</DESCRIPTION>
+<VALUES null='-10'/>
+</FIELD>
+<FIELD datatype="short" name="short_type_as_3*" ucd="meta.code" arraysize="3*">
+<DESCRIPTION>nt</DESCRIPTION>
+<VALUES null='-10'/>
+</FIELD>
+
+<!-- int -->
+<FIELD datatype="int" name="int_type_no_as" ucd="meta.code">
+<DESCRIPTION>nt</DESCRIPTION>
+<VALUES null='-10'/>
+</FIELD>
+<FIELD datatype="int" name="int_type_empty_as" ucd="meta.code" arraysize="">
+<DESCRIPTION>nt</DESCRIPTION>
+<VALUES null='-10'/>
+</FIELD>
+<FIELD datatype="int" name="int_type_as_1" ucd="meta.code" arraysize="1">
+<DESCRIPTION>nt</DESCRIPTION>
+<VALUES null='-10'/>
+</FIELD>
+<FIELD datatype="int" name="int_type_as_2" ucd="meta.code" arraysize="2">
+<DESCRIPTION>nt</DESCRIPTION>
+<VALUES null='-10'/>
+</FIELD>
+<FIELD datatype="int" name="int_type_as_*" ucd="meta.code" arraysize="*">
+<DESCRIPTION>nt</DESCRIPTION>
+<VALUES null='-10'/>
+</FIELD>
+<FIELD datatype="int" name="int_type_as_3*" ucd="meta.code" arraysize="3*">
+<DESCRIPTION>nt</DESCRIPTION>
+<VALUES null='-10'/>
+</FIELD>
+
+<!-- long -->
+<FIELD datatype="long" name="long_type_no_as" ucd="meta.code">
+<DESCRIPTION>nt</DESCRIPTION>
+<VALUES null='-10'/>
+</FIELD>
+<FIELD datatype="long" name="long_type_empty_as" ucd="meta.code" arraysize="">
+<DESCRIPTION>nt</DESCRIPTION>
+<VALUES null='-10'/>
+</FIELD>
+<FIELD datatype="long" name="long_type_as_1" ucd="meta.code" arraysize="1">
+<DESCRIPTION>nt</DESCRIPTION>
+<VALUES null='-10'/>
+</FIELD>
+<FIELD datatype="long" name="long_type_as_2" ucd="meta.code" arraysize="2">
+<DESCRIPTION>nt</DESCRIPTION>
+<VALUES null='-10'/>
+</FIELD>
+<FIELD datatype="long" name="long_type_as_*" ucd="meta.code" arraysize="*">
+<DESCRIPTION>nt</DESCRIPTION>
+<VALUES null='-10'/>
+</FIELD>
+<FIELD datatype="long" name="long_type_as_3*" ucd="meta.code" arraysize="3*">
+<DESCRIPTION>nt</DESCRIPTION>
+<VALUES null='-10'/>
+</FIELD>
+
+<!-- float -->
+<FIELD datatype="float" name="float_type_no_as" ucd="meta.code">
+<DESCRIPTION>nt</DESCRIPTION>
+<VALUES null='-1.1'/>
+</FIELD>
+<FIELD datatype="float" name="float_type_empty_as" ucd="meta.code" arraysize="">
+<DESCRIPTION>nt</DESCRIPTION>
+<VALUES null='-1.1'/>
+</FIELD>
+<FIELD datatype="float" name="float_type_as_1" ucd="meta.code" arraysize="1">
+<DESCRIPTION>nt</DESCRIPTION>
+<VALUES null='-1.1'/>
+</FIELD>
+<FIELD datatype="float" name="float_type_as_2" ucd="meta.code" arraysize="2">
+<DESCRIPTION>nt</DESCRIPTION>
+<VALUES null='-1.1'/>
+</FIELD>
+<FIELD datatype="float" name="float_type_as_*" ucd="meta.code" arraysize="*">
+<DESCRIPTION>nt</DESCRIPTION>
+<VALUES null='-1.1'/>
+</FIELD>
+<FIELD datatype="float" name="float_type_as_3*" ucd="meta.code" arraysize="3*">
+<DESCRIPTION>nt</DESCRIPTION>
+<VALUES null='-1.1'/>
+</FIELD>
+
+<!-- double -->
+<FIELD datatype="double" name="double_type_no_as" ucd="meta.code">
+<DESCRIPTION>nt</DESCRIPTION>
+<VALUES null='-1.2'/>
+</FIELD>
+<FIELD datatype="double" name="double_type_empty_as" ucd="meta.code" arraysize="">
+<DESCRIPTION>nt</DESCRIPTION>
+<VALUES null='-1.2'/>
+</FIELD>
+<FIELD datatype="double" name="double_type_as_1" ucd="meta.code" arraysize="1">
+<DESCRIPTION>nt</DESCRIPTION>
+<VALUES null='-1.2'/>
+</FIELD>
+<FIELD datatype="double" name="double_type_as_2" ucd="meta.code" arraysize="2">
+<DESCRIPTION>nt</DESCRIPTION>
+<VALUES null='-1.2'/>
+</FIELD>
+<FIELD datatype="double" name="double_type_as_*" ucd="meta.code" arraysize="*">
+<DESCRIPTION>nt</DESCRIPTION>
+<VALUES null='-1.2'/>
+</FIELD>
+<FIELD datatype="double" name="double_type_as_3*" ucd="meta.code" arraysize="3*">
+<DESCRIPTION>nt</DESCRIPTION>
+<VALUES null='-1.2'/>
+</FIELD>
+
+<!-- char -->
+<FIELD datatype="char" name="char_type_no_as" ucd="meta.code">
+<DESCRIPTION>nt</DESCRIPTION>
+<VALUES null=''/>
+</FIELD>
+<FIELD datatype="char" name="char_type_empty_as" ucd="meta.code" arraysize="">
+<DESCRIPTION>nt</DESCRIPTION>
+<VALUES null=''/>
+</FIELD>
+<FIELD datatype="char" name="char_type_as_1" ucd="meta.code" arraysize="1">
+<DESCRIPTION>nt</DESCRIPTION>
+<VALUES null=''/>
+</FIELD>
+<FIELD datatype="char" name="char_type_as_2" ucd="meta.code" arraysize="2">
+<DESCRIPTION>nt</DESCRIPTION>
+<VALUES null=''/>
+</FIELD>
+<FIELD datatype="char" name="char_type_as_*" ucd="meta.code" arraysize="*">
+<DESCRIPTION>nt</DESCRIPTION>
+<VALUES null=''/>
+</FIELD>
+<FIELD datatype="char" name="char_type_as_3*" ucd="meta.code" arraysize="3*">
+<DESCRIPTION>nt</DESCRIPTION>
+<VALUES null=''/>
+</FIELD>
+
+<!-- unsignedByte -->
+<FIELD datatype="unsignedByte" name="unsignedByte_type_no_as" ucd="meta.code">
+<DESCRIPTION>nt</DESCRIPTION>
+<VALUES null='255'/>
+</FIELD>
+<FIELD datatype="unsignedByte" name="unsignedByte_type_empty_as" ucd="meta.code" arraysize="">
+<DESCRIPTION>nt</DESCRIPTION>
+<VALUES null='255'/>
+</FIELD>
+<FIELD datatype="unsignedByte" name="unsignedByte_type_as_1" ucd="meta.code" arraysize="1">
+<DESCRIPTION>nt</DESCRIPTION>
+<VALUES null='255'/>
+</FIELD>
+<FIELD datatype="unsignedByte" name="unsignedByte_type_as_2" ucd="meta.code" arraysize="2">
+<DESCRIPTION>nt</DESCRIPTION>
+<VALUES null='255'/>
+</FIELD>
+<FIELD datatype="unsignedByte" name="unsignedByte_type_as_*" ucd="meta.code" arraysize="*">
+<DESCRIPTION>nt</DESCRIPTION>
+<VALUES null='255'/>
+</FIELD>
+<FIELD datatype="unsignedByte" name="unsignedByte_type_as_3*" ucd="meta.code" arraysize="3*">
+<DESCRIPTION>nt</DESCRIPTION>
+<VALUES null='255'/>
+</FIELD>
+
+<!-- timestamp -->
+<FIELD datatype="char" name="char_ts_type_as_1" ucd="meta.code" arraysize="1" xtype="adql:TIMESTAMP">
+<DESCRIPTION>nt</DESCRIPTION>
+<VALUES null=''/>
+</FIELD>
+<FIELD datatype="char" name="char_ts_type_as_2" ucd="meta.code" arraysize="2" xtype="adql:TIMESTAMP">
+<DESCRIPTION>nt</DESCRIPTION>
+<VALUES null=''/>
+</FIELD>
+<FIELD datatype="char" name="char_ts_type_as_*" ucd="meta.code" arraysize="*" xtype="adql:TIMESTAMP">
+<DESCRIPTION>nt</DESCRIPTION>
+<VALUES null=''/>
+</FIELD>
+<FIELD datatype="char" name="char_ts_type_as_3*" ucd="meta.code" arraysize="3*" xtype="adql:TIMESTAMP">
+<DESCRIPTION>nt</DESCRIPTION>
+<VALUES null=''/>
+</FIELD>
+
+
+<DATA>
+<TABLEDATA>
+<!-- ROW 0 -->
+<TR>
+<!-- boolean -->
+<TD>true</TD>
+<TD>true</TD>
+<TD>true</TD>
+<TD>true false</TD>
+<TD>true false true false</TD>
+<TD>true</TD>
+
+<!-- short -->
+<TD>1</TD>
+<TD>1</TD>
+<TD>1</TD>
+<TD>1 2</TD>
+<TD>1 2 3 4</TD>
+<TD>1</TD>
+
+<!-- int -->
+<TD>1000</TD>
+<TD>1000</TD>
+<TD>1000</TD>
+<TD>1000 2000</TD>
+<TD>1000 2000 3000 4000</TD>
+<TD>1000</TD>
+
+<!-- long -->
+<TD>100000</TD>
+<TD>100000</TD>
+<TD>100000</TD>
+<TD>100000 200000</TD>
+<TD>100000 200000 300000 400000</TD>
+<TD>100000</TD>
+
+<!-- float -->
+<TD>1.1</TD>
+<TD>1.1</TD>
+<TD>1.1</TD>
+<TD>1.1 2.1</TD>
+<TD>1.1 2.1 3.1 4.1</TD>
+<TD>1.1</TD>
+
+<!-- double -->
+<TD>10.1</TD>
+<TD>10.1</TD>
+<TD>10.1</TD>
+<TD>10.1 20.1</TD>
+<TD>10.1 20.1 30.1 40.1</TD>
+<TD>10.1</TD>
+
+<!-- char -->
+<TD>a</TD>
+<TD>a</TD>
+<TD>a</TD>
+<TD>a b</TD>
+<TD>a b c d</TD>
+<TD>a</TD>
+
+<!-- unsignedByte -->
+<TD>1</TD>
+<TD>1</TD>
+<TD>1</TD>
+<TD>1 2</TD>
+<TD>1 2 3 4</TD>
+<TD>1</TD>
+
+<!-- timestamp -->
+<TD>2015-01-30T10:11:12</TD>
+<TD>2015-01-30T10:11:12 2015-03-27T11:12:13</TD>
+<TD>2015-01-30T10:11:12 2015-03-27T11:12:13 2015-04-27T12:13:14 2015-05-27T13:14:15</TD>
+<TD>2015-01-30T10:11:12</TD>
+
+</TR>
+
+<!-- ROW 1: testing 3* (in this case: 2 values set) -->
+
+<TR>
+<!-- boolean -->
+<TD>true</TD>
+<TD>true</TD>
+<TD>true</TD>
+<TD>true false</TD>
+<TD>true false true false</TD>
+<TD>true false</TD>
+
+<!-- short -->
+<TD>1</TD>
+<TD>1</TD>
+<TD>1</TD>
+<TD>1 2</TD>
+<TD>1 2 3 4</TD>
+<TD>1 2</TD>
+
+<!-- int -->
+<TD>1000</TD>
+<TD>1000</TD>
+<TD>1000</TD>
+<TD>1000 2000</TD>
+<TD>1000 2000 3000 4000</TD>
+<TD>1000 2000</TD>
+
+<!-- long -->
+<TD>100000</TD>
+<TD>100000</TD>
+<TD>100000</TD>
+<TD>100000 200000</TD>
+<TD>100000 200000 300000 400000</TD>
+<TD>100000 200000</TD>
+
+<!-- float -->
+<TD>1.1</TD>
+<TD>1.1</TD>
+<TD>1.1</TD>
+<TD>1.1 2.1</TD>
+<TD>1.1 2.1 3.1 4.1</TD>
+<TD>1.1 2.1</TD>
+
+<!-- double -->
+<TD>10.1</TD>
+<TD>10.1</TD>
+<TD>10.1</TD>
+<TD>10.1 20.1</TD>
+<TD>10.1 20.1 30.1 40.1</TD>
+<TD>10.1 20.1</TD>
+
+<!-- char -->
+<TD>a</TD>
+<TD>a</TD>
+<TD>a</TD>
+<TD>a b</TD>
+<TD>a b c d</TD>
+<TD>a a</TD>
+
+<!-- unsignedByte -->
+<TD>1</TD>
+<TD>1</TD>
+<TD>1</TD>
+<TD>1 2</TD>
+<TD>1 2 3 4</TD>
+<TD>1 2</TD>
+
+<!-- timestamp -->
+<TD>2015-01-30T10:11:12</TD>
+<TD>2015-01-30T10:11:12 2015-03-27T11:12:13</TD>
+<TD>2015-01-30T10:11:12 2015-03-27T11:12:13 2015-04-27T12:13:14 2015-05-27T13:14:15</TD>
+<TD>2015-01-30T10:11:12 2015-03-27T11:12:13</TD>
+
+</TR>
+
+<!-- ROW 2: testing null values -->
+
+<TR>
+<!-- boolean -->
+<TD>true</TD>
+<TD>true</TD>
+<TD>true</TD>
+<TD>true</TD>
+<TD>true</TD>
+<TD>true</TD>
+
+<!-- short -->
+<TD>-10</TD>
+<TD>-10</TD>
+<TD>-10</TD>
+<TD>-10</TD>
+<TD>-10</TD>
+<TD>-10</TD>
+
+<!-- int -->
+<TD>-10</TD>
+<TD>-10</TD>
+<TD>-10</TD>
+<TD>-10</TD>
+<TD>-10</TD>
+<TD>-10</TD>
+
+<!-- long -->
+<TD>-10</TD>
+<TD>-10</TD>
+<TD>-10</TD>
+<TD>-10</TD>
+<TD>-10</TD>
+<TD>-10</TD>
+
+<!-- float -->
+<TD>-1.1</TD>
+<TD>-1.1</TD>
+<TD>-1.1</TD>
+<TD>-1.1</TD>
+<TD>-1.1</TD>
+<TD>-1.1</TD>
+
+<!-- double -->
+<TD>-1.2</TD>
+<TD>-1.2</TD>
+<TD>-1.2</TD>
+<TD>-1.2</TD>
+<TD>-1.2</TD>
+<TD>-1.2</TD>
+
+<!-- char -->
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+
+<!-- unsignedByte -->
+<TD>255</TD>
+<TD>255</TD>
+<TD>255</TD>
+<TD>255</TD>
+<TD>255</TD>
+<TD>255</TD>
+
+<!-- timestamp -->
+<TD></TD>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+
+</TR>
+
+</TABLEDATA>
+</DATA>
+</TABLE>
+</RESOURCE>
+</VOTABLE>

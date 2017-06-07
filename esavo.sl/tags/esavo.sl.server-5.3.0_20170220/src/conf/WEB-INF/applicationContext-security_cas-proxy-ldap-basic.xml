@@ -1,0 +1,142 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:s="http://www.springframework.org/schema/security" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.springframework.org/schema/beans
+                  http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+                  http://www.springframework.org/schema/security
+                  http://www.springframework.org/schema/security/spring-security-4.0.xsd">
+
+<!-- 	This creates a session cookie always the first time the application is accessed. If the first access is
+		HTTP, a non-secure cookie is created. -->
+<!--     <http create-session="always"> -->
+    
+    <s:http entry-point-ref="casEntryPoint">
+	    <s:headers>
+			<s:frame-options policy="SAMEORIGIN"/>
+			<s:hsts disabled="true"/>
+		</s:headers>
+    	<s:csrf disabled="true"/>
+    	
+    	<s:intercept-url pattern="/CasLogin**" access="hasRole('USER')" />
+		<s:custom-filter ref="casFilter" position="CAS_FILTER" />
+        <s:form-login 
+        	username-parameter="username"
+        	password-parameter="password"
+            login-processing-url="/login" 
+            authentication-success-handler-ref="loginSuccessHandler" 
+            authentication-failure-handler-ref="loginFailureHandler"/> 
+        <s:logout logout-url="/logout" invalidate-session="true" success-handler-ref="logoutSuccessHandler"/>
+		<s:http-basic />
+    </s:http>
+    
+    <!-- Authentication managers -->
+    <s:authentication-manager alias="authenticationManager">
+		<s:authentication-provider ref="casAuthenticationProvider" />
+        <s:authentication-provider ref="ldapAuthenticationProvider"/>
+    </s:authentication-manager>
+
+    <bean id="loginSuccessHandler" class="esavo.sl.security.authentication.LoginSuccessHandler" />
+    <bean id="loginFailureHandler" class="esavo.sl.security.authentication.LoginFailureHandler" />
+    <bean id="logoutSuccessHandler" class="esavo.sl.security.authentication.LogoutSuccessHandler" />
+    
+
+
+	<!-- LDAP -->
+    <s:ldap-server url="@uws.ldap.server@"/>
+
+	<bean id="ldapAuthoritiesPopulator" class="esavo.sl.security.authentication.CustomLdapAuthoritiesPopulator">
+                <constructor-arg ref="contextSource" />
+                <constructor-arg value="ou=people,o=esa.nl" />
+    </bean>
+    
+    <!-- This bean points at the embedded directory server created by the ldap-server element above  -->
+    <bean id="ldapAuthenticationProvider" class="org.springframework.security.ldap.authentication.LdapAuthenticationProvider">
+        <constructor-arg>
+            <bean class="org.springframework.security.ldap.authentication.BindAuthenticator">
+                <constructor-arg ref="contextSource" />
+                <property name="userSearch" ref="userSearch"/>
+            </bean>
+        </constructor-arg>
+        <constructor-arg ref="ldapAuthoritiesPopulator" />
+    </bean>
+    
+    
+    <!-- LDAP configuration for User Details Service -->
+	<bean id="contextSource"
+		class="org.springframework.security.ldap.DefaultSpringSecurityContextSource">
+		<constructor-arg value="@uws.ldap.server@" />
+		<property name="userDn"
+			value="cn=Euclid Applications Admin RO,ou=Special Users,o=esa.nl" />
+		<property name="password" value="@ldap.pwd@" />
+	</bean>
+
+	<bean id="userSearch"
+		class="org.springframework.security.ldap.search.FilterBasedLdapUserSearch">
+		<constructor-arg index="0" value="ou=people,o=esa.nl" />
+		<constructor-arg index="1" value="(uid={0})" />
+		<constructor-arg index="2" ref="contextSource" />
+	</bean>
+
+	<bean id="userDetailsService"
+		class="org.springframework.security.ldap.userdetails.LdapUserDetailsService">
+		<constructor-arg ref="userSearch" />
+		<constructor-arg ref="ldapAuthoritiesPopulator" />
+	</bean>
+    
+	<!-- CAS -->
+
+	<!-- LOGIN -->
+	<bean id="serviceProperties" class="org.springframework.security.cas.ServiceProperties">
+		<property name="service"
+			value="@cas.service.url@/login/cas" />
+		<property name="sendRenew" value="false" />
+	</bean>
+
+	<bean id="casFilter"
+		class="org.springframework.security.cas.web.CasAuthenticationFilter">
+		<property name="authenticationManager" ref="authenticationManager" />
+		<property name="authenticationSuccessHandler" ref="loginSuccessHandler" />
+		<property name="authenticationFailureHandler" ref="loginFailureHandler" />
+		<property name="proxyGrantingTicketStorage" ref="pgtStorage"/>
+    	<property name="proxyReceptorUrl" value="/j_spring_cas_security_proxyreceptor"/>
+	</bean>
+	
+	<bean id="casEntryPoint"
+		class="org.springframework.security.cas.web.CasAuthenticationEntryPoint">
+		<property name="loginUrl" value="@cas.server.url@/login" />
+		<property name="serviceProperties" ref="serviceProperties" />
+	</bean>
+	
+	<bean id="pgtStorage" class="org.jasig.cas.client.proxy.ProxyGrantingTicketStorageImpl"/>
+	
+	<bean id="casAuthenticationProvider"
+		class="org.springframework.security.cas.authentication.CasAuthenticationProvider">
+		<property name="authenticationUserDetailsService">
+			<bean
+				class="org.springframework.security.core.userdetails.UserDetailsByNameServiceWrapper">
+				<constructor-arg ref="userDetailsService" />
+			</bean>
+		</property>
+		<property name="serviceProperties" ref="serviceProperties" />
+		<property name="ticketValidator">
+			<bean class="org.jasig.cas.client.validation.Cas20ProxyTicketValidator">
+				<constructor-arg index="0" value="@cas.server.url@" />
+				<property name="proxyCallbackUrl"
+            		value="@cas.service.url@/j_spring_cas_security_proxyreceptor"/>
+        		<property name="proxyGrantingTicketStorage" ref="pgtStorage"/>
+			</bean>
+		</property>
+		<property name="key" value="klqejr94jfqkljr84ujkqjr4884klfu48rlelkmv99" />
+	</bean>
+	
+	<!-- Black magic to make sync/async threads work with springsecuirty 4.0 in command line  -->
+	<bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+		<property name="targetClass" value="org.springframework.security.core.context.SecurityContextHolder" />
+		<property name="targetMethod" value="setStrategyName" />
+		<property name="arguments">
+			<list>
+				<value>MODE_INHERITABLETHREADLOCAL</value>
+			</list>
+		</property>
+	</bean>
+	
+</beans>   

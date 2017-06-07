@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ivy-module version="2.0" xmlns:e="http://ant.apache.org/ivy/extra">
+
+
+	<info organisation="esa" module="esavo-tap" revision="${software.version}"
+		status="integration" e:project="esavo" e:layer="common"
+		e:component="esavo-tap">
+
+		<description homepage="http://satscm.esac.esa.int/redmine/projects/gaiacs">
+			TAP
+		</description>
+	</info>
+	<configurations/>
+	<publications>
+	 	<artifact name="esavo-tap" type="jar" ext="jar"/>
+	</publications>
+	<dependencies>
+		
+	 	<dependency org="checkstyle" name="checkstyle-no-deps" rev="4.4" force="false" transitive="true"/>
+	 	<dependency org="junit" name="junit" rev="4.5" force="false" transitive="true"/>
+		<dependency org="log4j" name="log4j" rev="1.2.16" force="false" transitive="false"/>
+		
+		<dependency org="cds.savot" name="common" rev="2.6" force="false" transitive="false"/>
+		<dependency org="cds.savot" name="model" rev="2.6.tappatched" force="false" transitive="false"/>
+		<dependency org="cds.savot" name="pull" rev="2.6" force="false" transitive="false"/>
+		<dependency org="cds.savot" name="writer" rev="2.6" force="false" transitive="false"/>
+		<dependency org="cds.savot" name="binary" rev="1.0" force="false" transitive="false"/>
+		<dependency org="cds.savot" name="uploadUtils" rev="1.0" force="false" transitive="false"/>
+		
+		<dependency org="uk.ac.starlink" name="stil" rev="3.1.2" force="true" transitive="false"/>
+		
+		<dependency org="commons-lang" name="commons-lang" rev="2.4" force="true" transitive="true"/>
+		<dependency org="commons-io" name="commons-io" rev="2.0.1" force="false" transitive="true" />
+		
+		
+		<dependency org="org.json" name="json" rev="1.0" force="false" transitive="false"/>
+		
+		<dependency e:project="esavo" e:layer="common" e:component="adql" name="esavo-adql" rev="2.0" force="false" transitive="true" />
+		<dependency e:project="esavo" e:layer="common" e:component="esavo-uws" name="esavo-uws" rev="5.2.0" force="false" transitive="true" />
+
+	</dependencies>
+</ivy-module>

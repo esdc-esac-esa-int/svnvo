@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://esa.int/xml/EsaTapPlus" xmlns="http://esa.int/xml/EsaTapPlus"
+	elementFormDefault="qualified">
+
+	<xs:attribute name="size">
+		<xs:simpleType>
+			<xs:restriction base="xs:long" />
+		</xs:simpleType>
+	</xs:attribute>
+
+	<xs:attribute name="flags">
+		<xs:simpleType>
+			<xs:restriction base="xs:string" />
+		</xs:simpleType>
+	</xs:attribute>
+
+	<xs:attribute name="parameter_type">
+		<xs:simpleType>
+			<xs:restriction base="xs:string" />
+		</xs:simpleType>
+	</xs:attribute>
+
+	<xs:attribute name="parameter_data_type">
+		<xs:simpleType>
+			<xs:restriction base="xs:string" />
+		</xs:simpleType>
+	</xs:attribute>
+
+	<xs:attribute name="hierarchy">
+		<xs:simpleType>
+			<xs:restriction base="xs:string" />
+		</xs:simpleType>
+	</xs:attribute>
+
+	<xs:attribute name="public">
+		<xs:simpleType>
+			<xs:restriction base="xs:string" />
+		</xs:simpleType>
+	</xs:attribute>
+
+</xs:schema> 

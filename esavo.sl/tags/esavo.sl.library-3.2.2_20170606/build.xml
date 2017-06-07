@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+ build.xml
+ gaia-sl-tapcds  -  TAP service from CDS
+-->
+
+<project name="esavo-sl-tap" default="dist" xmlns:cl="antlib:net.jtools.classloadertask" basedir=".">
+
+	<description>
+    	 esavo tap server
+    </description>
+
+	<import file="ivy-tasks.xml" />
+
+	<!-- Jera Ant task for encoding passwords -->
+	<taskdef name="query" classpath="setup/antlibs/JeraAntTasks.jar" classname="com.jera.anttasks.Query" />
+
+	<!-- Included for autocontent deploy -->
+	<typedef uri="antlib:net.jtools.classloadertask" resource="net/jtools/classloadertask/antlib.xml">
+		<classpath>
+			<fileset dir="setup/antlibs/" includes="ant-classloadertask.jar" />
+		</classpath>
+	</typedef>
+
+	<cl:classloader loader="project">
+		<classpath>
+			<fileset dir="setup/antlibs" includes="jsch.jar" />
+		</classpath>
+	</cl:classloader>
+	<!-- Included for autocontent deploy -->
+
+	<property file="build.properties" />
+	<property file="build.properties.defaults" />
+	<property file="build.properties.keys" />
+
+	<path id="subant.path" />
+
+	<fileset id="lib.fileset" dir="${lib.dir}" excludes="*.xml" />
+
+	<path id="build.path">
+		<fileset refid="lib.fileset" />
+	</path>
+
+	<path id="test.path">
+		<path refid="build.path" />
+		<pathelement location="${build.classes.dir}" />
+	</path>
+
+	<target name="all" depends="dist, test, docs, check" 
+		description="Build, pack, test, document and check the application" />
+
+	<target name="clean" depends="ivy-clean-jars, ivy-clean-cache" description="Clean up the environment">
+		<delete dir="${build.dir}" />
+		<delete dir="${dist.dir}" />
+		<delete dir="${final.dir}" />
+		<delete dir="${subst.dir}" />
+	</target>
+
+	<target name="init" depends="ivy-retrieve" description="Initialise the environment">
+		<tstamp />
+		<mkdir dir="${build.dir}" />
+	</target>
+	
+	<target name="build" depends="clean, init, -update-sonar-projectVersion" description="Builds the library">
+		<mkdir dir="${build.classes.dir}" />
+		
+		<copy file="${conf.dir}/${conf.sl.properties.file}" todir="${build.classes.dir}" overwrite="true"/>
+		<replace file="${build.classes.dir}/${conf.sl.properties.file}">
+			<replacefilter token="@software.version@" value="${software.version}" />
+		</replace>
+		
+		<javac srcdir="${java.dir}" destdir="${build.classes.dir}" 
+			classpathref="build.path" source="${javac.source}" 
+			target="${javac.target}" compiler="${javac.compiler}" 
+			nowarn="${javac.nowarn}" debug="${javac.debug}" deprecation="${javac.deprec}" />
+	</target>
+
+	<target name="dist" depends="build" description="Make the library file: .jar">
+		<mkdir dir="${dist.dir}" />
+		<!-- Creating war file -->
+		<jar destfile="${dist.lib.file}" basedir="${build.classes.dir}" manifest="${conf.manifest.file}" compress="${jar.compress}" update="${jar.update}">
+		</jar>
+	</target>
+
+	<target name="build-tests" depends="build" description="Compiles test code">
+		<mkdir dir="${build.testclass.dir}" />
+		<javac srcdir="test" includes="**" destdir="${build.testclass.dir}" classpathref="test.path" source="${javac.source}" target="${javac.target}" compiler="${javac.compiler}" nowarn="${javac.nowarn}" debug="${javac.debug}" />
+
+		<copy todir="${build.testclass.dir}">
+			<fileset dir="test" />
+		</copy>
+
+	</target>
+
+	<target name="test" depends="build-tests" description="Run the unit tests (using JUnit or other specific tests)">
+		<!--mkdir dir="${build.testclass.dir}" /-->
+		<mkdir dir="${build.jureport.dir}" />
+		<!-- javac srcdir="test" includes="**" destdir="${build.testclass.dir}" classpathref="test.path" 
+			source="${javac.source}" target="${javac.target}" compiler="${javac.compiler}" nowarn="${javac.nowarn}" debug="${javac.debug}"/-->
+
+   		<!-- input message="classpath: '${build.testclass.dir}' " addproperty="jc1.test" validargs="yes,no" defaultvalue="yes" /-->
+
+		<junit printsummary="${junit.summary}" showoutput="${junit.output}">
+			<classpath>
+				<path refid="test.path" />
+				<pathelement location="${build.testclass.dir}" />
+				<pathelement location="${java.dir}" />
+				<pathelement location="build/classes" />
+			</classpath>
+			<!--
+			<batchtest todir="${build.jureport.dir}" haltonfailure="${junit.halt}">
+				<fileset dir="${build.testclass.dir}" includes="**/*Test.class" />
+			</batchtest>
+			-->
+			<!-- test name="esavo.uws.AllTests" todir="${build.jureport.dir}" haltonfailure="no" /-->
+			<test name="AllTests" todir="${build.jureport.dir}" haltonfailure="no" />
+
+			<!-- test name="esac.archive.gacs.sl.services.upload.UploadTest" todir="${build.jureport.dir}" haltonfailure="no" /-->
+			<!-- test name="esac.archive.gacs.sl.services.transform.TransformToJsonTest" todir="${build.jureport.dir}" haltonfailure="no" /-->
+			<!-- test name="esac.archive.gacs.sl.AllTests" todir="${build.jureport.dir}" haltonfailure="no" /-->
+			<!-- test name="esac.archive.gacs.sl.services.transform.TransformToJsonTest" todir="${build.jureport.dir}" haltonfailure="no" /-->
+			<formatter type="xml" />
+		</junit>
+		
+		<!-- Jacoco test coverage -->
+		<taskdef uri="antlib:org.jacoco.ant" resource="org/jacoco/ant/antlib.xml">
+			<classpath>
+                   		<fileset dir="${lib.dir}">
+	     				<include name="*jacoco*.jar"/>
+	   	   		</fileset>
+			</classpath>
+		</taskdef>
+
+		<jacoco:coverage destfile="${build.dir}/jacoco.exec" xmlns:jacoco="antlib:org.jacoco.ant">
+			<junit printsummary="${junit.summary}" showoutput="${junit.output}" fork="true">
+				<classpath>
+					<path refid="test.path" />
+					<pathelement location="${build.testclass.dir}" />
+				</classpath>
+				<!-- batchtest todir="${build.jureport.dir}" haltonfailure="${junit.halt}">
+					<fileset dir="${build.testclass.dir}" includes="**/*Test.class" />
+				</batchtest -->
+				<test name="AllTests" todir="${build.jureport.dir}" haltonfailure="no" />
+				<formatter type="xml" />
+			</junit>
+		</jacoco:coverage>
+
+		<junitreport todir="${build.jureport.dir}">
+			<fileset dir="${build.jureport.dir}" includes="TEST-*.xml" />
+			<report todir="${build.jureport.dir}" />
+		</junitreport>
+	</target>
+
+	<target name="docs" depends="init" description="Generate the API javadoc (and other documentation files)">
+		<mkdir dir="${build.javadoc.dir}" />
+
+		<javadoc sourcepath="${java.dir}" destdir="${build.javadoc.dir}" source="${javac.source}" packagenames="${javadoc.packages}" access="${javadoc.access}" failonerror="${javadoc.fail}">
+			<classpath refid="build.path" />
+
+			<!-- <sourcepath location="${component.dir}/${component.java.dir}"/> -->
+			<link href="http://download.oracle.com/javase/6/docs/api/" />
+			<link href="http://download.oracle.com/javase/6/docs/api/" />
+		</javadoc>
+	</target>
+
+	<target name="check" depends="build" description="Check the sources for style violations (and report them)">
+		<mkdir dir="${build.csreport.dir}" />
+		<taskdef resource="checkstyletask.properties" classpath="${lib.checkstyle.jar}" />
+
+		<checkstyle config="${checkstyle.config}" failonviolation="${checkstyle.fail}">
+			<classpath>
+				<path refid="build.path" />
+				<pathelement location="${build.classes.dir}" />
+			</classpath>
+			<fileset dir="${java.dir}" includes="**/*.java" />
+			<formatter type="xml" tofile="${build.csreport.dir}/csreport.xml" />
+		</checkstyle>
+
+		<xslt basedir="${build.csreport.dir}" includes="*.xml" destdir="${build.csreport.dir}" style="${checkstyle.style}">
+			<param name="output.dir" expression="${build.csreport.dir}" />
+			<param name="source.dir" expression="${basedir}/${java.dir}/" />
+		</xslt>
+	</target>
+	
+	<target name="-update-sonar-projectVersion"
+	        description="Update value of sonar.projectVersion property in sonar properties file">
+	        <echo>Extract version number from Ivy file</echo>
+	        <loadfile srcfile="ivy.xml" property="ivy.revision">
+	            <filterchain>
+	                <linecontains>
+	                    <contains value="revision=&quot;" />
+	                </linecontains>
+	                <tokenfilter>
+	                    <replacestring from="revision=&quot;" to="&quot;" />
+	                </tokenfilter>
+	            </filterchain>
+	        </loadfile>
+	        <echo message="${ivy.revision}" />
+
+	        <echo>Replace version in sonar configuration file</echo>
+	        <replaceregexp file="sonar-project.properties" match="sonar.projectVersion=(.)*"
+	            replace="sonar.projectVersion=${ivy.revision}">
+	        </replaceregexp>
+	</target> 
+
+</project>

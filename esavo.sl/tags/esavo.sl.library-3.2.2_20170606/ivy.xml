@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ivy-module version="2.0" xmlns:e="http://ant.apache.org/ivy/extra">
+
+	<info organisation="esa" module="esavo-sl" revision="${software.version}"
+		status="integration" e:project="esavo" e:layer="common" e:component="esavo-sl">
+		<description homepage="http://satscm.esac.esa.int/redmine/projects/esavo.sl">
+			esavo tap server
+		</description>
+	</info>
+	<configurations />
+	<publications>
+		<artifact name="esavo-sl" type="jar" ext="jar" />
+	</publications>
+	<dependencies>
+
+		<!-- Third party -->
+		<dependency org="checkstyle" name="checkstyle-no-deps" rev="4.4" force="true" transitive="true" />
+		<dependency org="junit" name="junit" rev="4.5" force="true" transitive="true" />
+		<dependency org="log4j" name="log4j" rev="1.2.15" force="true" transitive="false" />
+		<dependency org="javax.servlet" name="servlet-api" rev="2.5" force="true" transitive="false" />
+		<dependency org="org.apache.tomcat" name="jdbc" rev="7.0.39" force="true" transitive="false" />
+		<dependency org="commons-codec" name="commons-codec" rev="1.6" force="true" transitive="true" />
+		<dependency org="commons-fileupload" name="commons-fileupload" 	rev="1.2.2"	force="false" transitive="false" />
+		<dependency org="commons-io" name="commons-io" rev="2.0.1" force="false" transitive="true" />
+		<dependency org="javatar" name="javatar-longlinks" rev="1.0" force="false" transitive="true" />
+
+		<!-- Test coverage; sonar -->
+		<dependency org="org.jacoco" name="org.jacoco.ant" rev="0.7.4" force="false" transitive="true" />
+		
+		<!-- GWT -->
+		<dependency org="com.google.gwt" name="gwt-crypto" rev="2.3.0-20110518.123759-2" force="true" transitive="true" />
+
+		<!-- ESAVO -->
+		<dependency e:project="esavo" e:layer="common" e:component="esavo-tap" name="esavo-tap" rev="6.2.2" force="true" transitive="true" />
+
+		<!-- ABSI -->
+		<dependency e:project="absi" e:layer="cl" e:component="aio" name="absi-cl-aio-module" rev="1.16" force="true" transitive="true" />
+		<dependency e:project="absi" e:layer="sl" e:component="targetresolver-module" name="absi-sl-targetresolver-module" rev="0.9" force="false" transitive="true" />
+		<dependency e:project="absi" e:layer="sl" e:component="server-module" name="absi-sl-server-module" rev="0.7" force="false" transitive="true" />
+		<dependency e:project="absi" e:layer="common" e:component="skycoords-module" name="absi-common-skycoords-module" rev="0.2" force="false" transitive="true"/>		
+		<dependency e:project="absi" e:layer="common" e:component="countryresolver-module" name="absi-common-countryresolver-module" rev="0.1.1" force="false" transitive="true"/>
+
+		<!-- Spring security -->
+		<dependency org="commons-logging" name="commons-logging" rev="1.1.1" force="true" transitive="true"/>
+		<dependency org="org.slf4j" name="slf4j-log4j12" rev="1.6.1" force="true" transitive="true"/>
+		<dependency org="org.springframework" name="spring-web" rev="4.1.6.RELEASE" force="true" transitive="true"/>
+		<dependency org="org.springframework.security" name="spring-security-web" rev="4.0.0.RELEASE" force="true" transitive="true"/>
+		<dependency org="org.springframework.security" name="spring-security-ldap" rev="4.0.0.RELEASE" force="true" transitive="true"/>
+		<dependency org="org.springframework.security" name="spring-security-cas" rev="4.0.0.RELEASE" force="true" transitive="true"/>
+		<dependency org="org.springframework.security" name="spring-security-config" rev="4.0.0.RELEASE" force="true" transitive="true"/>
+
+	</dependencies>
+</ivy-module>

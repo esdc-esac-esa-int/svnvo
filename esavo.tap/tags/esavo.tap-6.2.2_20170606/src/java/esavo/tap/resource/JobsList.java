@@ -1,0 +1,55 @@
+package esavo.tap.resource;
+
+import java.io.IOException;
+import java.util.List;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import esavo.tap.TAPException;
+import esavo.tap.TAPService;
+import esavo.uws.UwsException;
+import esavo.uws.UwsManager;
+import esavo.uws.actions.UwsActionsManager;
+import esavo.uws.owner.UwsJobOwner;
+
+public class JobsList implements TAPResource {
+	
+	private static final String NAME = "jobs_list";
+	private static final String RESOURCE_ITEM = "jobs";
+	private static final String[] RESOURCE_ITEMS = {RESOURCE_ITEM};
+	
+	private TAPService service;
+	
+	@Override
+	public void init(TAPService service) {
+		this.service = service;
+	}
+
+	@Override
+	public String getName() {
+		return NAME;
+	}
+	
+	@Override
+	public String[] getResourceItems(){
+		return RESOURCE_ITEMS;
+	}
+
+	@Override
+	public boolean canHandle(String action) {
+		return RESOURCE_ITEM.equals(action);
+	}
+
+	@Override
+	public boolean executeResource(HttpServletRequest request, HttpServletResponse response, UwsJobOwner user) throws ServletException, IOException,
+			TAPException, UwsException {
+		UwsManager manager = UwsManager.getInstance();
+		UwsActionsManager actionsManager = UwsActionsManager.getInstance();
+		List<String> toIgnoreParameters = service.getUwsJobsToIgnoreParameters();
+		actionsManager.executeRequest(manager, user, request, response, toIgnoreParameters);
+		return true;
+	}
+
+}

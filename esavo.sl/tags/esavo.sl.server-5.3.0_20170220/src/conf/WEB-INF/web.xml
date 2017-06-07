@@ -1,0 +1,583 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	id="WebApp_ID" version="2.5">
+	<display-name>ESAVO_SERVER</display-name>
+
+		<context-param>
+			<param-name>esavo.sl.service.class</param-name>
+			<param-value>@esavo.sl.service.class@</param-value>
+		</context-param>
+	
+		<context-param>
+			<param-name>esavo.sl.version</param-name>
+			<param-value>@esavo.sl.version@</param-value>
+		</context-param>
+		<context-param>
+			<param-name>cas.server.url</param-name>
+			<param-value>@cas.server.url@</param-value>
+		</context-param>
+		<context-param>
+			<param-name>esavo.sl.tap.actions.voDataServiceSchemaExtension</param-name>
+			<param-value>@vodataservice.schema.extension@</param-value>
+		</context-param>
+		<context-param>
+			<param-name>esavo.sl.tap.actions.voFunctionsSchema</param-name>
+			<param-value>@vofunctionsservice.schema@</param-value>
+		</context-param>
+
+
+		<context-param>
+			<param-name>esavo.sl.tap.upload_limit_rows</param-name>
+			<param-value>@tap.upload.rows.limit@</param-value>
+		</context-param>
+		<context-param>
+			<param-name>tap.output_limit_rows</param-name>
+			<param-value>@tap.output.rows.limit@</param-value>
+		</context-param>
+		<context-param>
+			<param-name>tap.userupload.tablespace</param-name>
+			<param-value>@tap.userupload.tablespace@</param-value>
+		</context-param>
+
+		<context-param>
+			<param-name>uws.app.id</param-name>
+			<param-value>@app.id@</param-value>
+		</context-param>
+		<context-param>
+			<param-name>uws.app.storage_dir</param-name>
+			<param-value>@uws.app.storage_dir@</param-value>
+		</context-param>
+		<context-param>
+			<param-name>uws.async_max_running_jobs</param-name>
+			<param-value>@uws.async_max_running_jobs@</param-value>
+		</context-param>
+		<context-param>
+			<param-name>uws.sync_max_running_jobs</param-name>
+			<param-value>@uws.sync_max_running_jobs@</param-value>
+		</context-param>
+		<context-param>
+			<param-name>uws.sync_max_queued_jobs</param-name>
+			<param-value>@uws.sync_max_queued_jobs@</param-value>
+		</context-param>
+
+		<context-param>
+			<param-name>uws.restart.pending_jobs</param-name>
+			<param-value>@uws.restart.pending_jobs@</param-value>
+		</context-param>
+		<context-param>
+			<param-name>uws.jdbc.driver</param-name>
+			<param-value>@db.driver@</param-value>
+		</context-param>
+		<context-param>
+			<param-name>uws.jdbc.url</param-name>
+			<param-value>@db.url@</param-value>
+		</context-param>
+
+		<!--  JOBS SYNC DB Pool configuration -->
+		<context-param>
+			<param-name>tap.jdbc.jobs.sync.dbOwner</param-name>
+			<param-value>@db.jobs.sync.owner@</param-value>
+		</context-param>
+		<context-param>
+			<param-name>tap.jdbc.jobs.sync.dbPwd</param-name>
+			<param-value>@db.jobs.sync.pwd@</param-value>
+		</context-param>
+		<context-param>
+			<param-name>tap.jdbc.jobs.sync.dbTimeout</param-name>
+			<param-value>@db.jobs.sync.timeout@</param-value>
+		</context-param>
+		<context-param>
+			<param-name>tap.jdbc.jobs.sync.dbMaxActive</param-name>
+			<param-value>@db.jobs.sync.max_active@</param-value>
+		</context-param>
+
+		<!--  JOBS ASYNC DB Pool configuration -->
+		<context-param>
+			<param-name>tap.jdbc.jobs.async.dbOwner</param-name>
+			<param-value>@db.jobs.async.owner@</param-value>
+		</context-param>
+		<context-param>
+			<param-name>tap.jdbc.jobs.async.dbPwd</param-name>
+			<param-value>@db.jobs.async.pwd@</param-value>
+		</context-param>
+		<context-param>
+			<param-name>tap.jdbc.jobs.async.dbTimeout</param-name>
+			<param-value>@db.jobs.async.timeout@</param-value>
+		</context-param>
+		<context-param>
+			<param-name>tap.jdbc.jobs.async.dbMaxActive</param-name>
+			<param-value>@db.jobs.async.max_active@</param-value>
+		</context-param>
+
+
+		<!--  MANAGEMENT DB Pool configuration -->
+		<context-param>
+			<param-name>uws.jdbc.management.dbOwner</param-name>
+			<param-value>@db.management.owner@</param-value>
+		</context-param>
+		<context-param>
+			<param-name>uws.jdbc.management.dbPwd</param-name>
+			<param-value>@db.management.pwd@</param-value>
+		</context-param>
+		<context-param>
+			<param-name>uws.jdbc.management.dbTimeout</param-name>
+			<param-value>@db.management.timeout@</param-value>
+		</context-param>
+		<context-param>
+			<param-name>uws.jdbc.management.dbMaxActive</param-name>
+			<param-value>@db.management.max_active@</param-value>
+		</context-param>
+
+		<context-param>
+			<param-name>uws.db.quota</param-name>
+			<param-value>@uws.db.quota@</param-value>
+		</context-param>
+		<context-param>
+			<param-name>uws.files.quota</param-name>
+			<param-value>@uws.files.quota@</param-value>
+		</context-param>
+		<context-param>
+			<param-name>uws.exec_duration_limit</param-name>
+			<param-value>@uws.exec_duration_limit@</param-value>
+		</context-param>
+		<context-param>
+			<param-name>uws.upload.enabled</param-name>
+			<param-value>@uws.upload.enabled@</param-value>
+		</context-param>
+		<context-param>
+			<param-name>uws.upload.max_size</param-name>
+			<param-value>@uws.upload.max_size@</param-value>
+		</context-param>
+		<context-param>
+			<param-name>uws.jobs_removal_check_time</param-name>
+			<param-value>@uws.jobs_removal_check_time@</param-value>
+		</context-param>
+		<context-param>
+			<param-name>uws.jobs_delta_destruction_time</param-name>
+			<param-value>@uws.jobs_delta_destruction_time@</param-value>
+		</context-param>
+		<context-param>
+			<param-name>uws.old_empty_dirs_cmp_time</param-name>
+			<param-value>@uws.old_empty_dirs_cmp_time@</param-value>
+		</context-param>
+		<context-param>
+			<param-name>uws.events_removal_check_time</param-name>
+			<param-value>@uws.events_removal_check_time@</param-value>
+		</context-param>
+		<context-param>
+			<param-name>uws.events_delta_destruction_time</param-name>
+			<param-value>@uws.events_delta_destruction_time@</param-value>
+		</context-param>
+		<context-param>
+			<param-name>uws.notifications_removal_check_time</param-name>
+			<param-value>@uws.notifications_removal_check_time@</param-value>
+		</context-param>
+		<context-param>
+			<param-name>uws.notifications_delta_destruction_time</param-name>
+			<param-value>@uws.notifications_delta_destruction_time@</param-value>
+		</context-param>
+		
+		<context-param>
+			<param-name>uws.ldap.server</param-name>
+			<param-value>@uws.ldap.server@</param-value>
+		</context-param>
+		<context-param>
+			<param-name>uws.ldap.search_base</param-name>
+			<param-value>@uws.ldap.search_base@</param-value>
+		</context-param>
+		<context-param>
+			<param-name>uws.ldap.usr</param-name>
+			<param-value>@uws.ldap.usr@</param-value>
+		</context-param>
+		<context-param>
+			<param-name>uws.ldap.pwd</param-name>
+			<param-value>@uws.ldap.pwd@</param-value>
+		</context-param>
+
+		<context-param>
+			<param-name>uws.valid_list_ids</param-name>
+			<param-value>@uws.valid_list_ids@</param-value>
+		</context-param>
+
+		<context-param>
+			<param-name>tap.public.group.id</param-name>
+			<param-value>@tap.public.group.id@</param-value>
+		</context-param>
+		<context-param>
+			<param-name>tap.public.group.owner</param-name>
+			<param-value>@tap.public.group.owner@</param-value>
+		</context-param>
+
+		<!-- DD properties -->
+		<context-param>
+			<param-name>dd.compress_single_file</param-name>
+			<param-value>@dd.compress_single_file@</param-value>
+		</context-param>
+		<context-param> 
+			<param-name>dd.email_conf</param-name>
+			<param-value>@dd.email_conf@</param-value>
+		</context-param>
+		<context-param> 
+			<param-name>dd.ftp_host</param-name>
+			<param-value>@dd.ftp_host@</param-value>
+		</context-param>
+		<context-param> 
+			<param-name>dd.ftp_secure</param-name>
+			<param-value>@dd.ftp_secure@</param-value>
+		</context-param>
+		<context-param> 
+			<param-name>dd.ftp_public</param-name>
+			<param-value>@dd.ftp_public@</param-value>
+		</context-param>
+		<context-param> 
+			<param-name>dd.ftp_protocol</param-name>
+			<param-value>@dd.ftp_protocol@</param-value>
+		</context-param>
+		<context-param> 
+			<param-name>dd.ftp_port</param-name>
+			<param-value>@dd.ftp_port@</param-value>
+		</context-param>
+		<context-param> 
+			<param-name>dd.helpdesk_custodian</param-name>
+			<param-value>@dd.helpdesk_custodian@</param-value>
+		</context-param>
+		<context-param> 
+			<param-name>dd.mail_custodian</param-name>
+			<param-value>@dd.mail_custodian@</param-value>
+		</context-param>
+		<context-param> 
+			<param-name>dd.mail_from</param-name>
+			<param-value>@dd.mail_from@</param-value>
+		</context-param>
+		<context-param> 
+			<param-name>dd.master_email</param-name>
+			<param-value>@dd.master_email@</param-value>
+		</context-param>
+		<context-param> 
+			<param-name>dd.mission_name</param-name>
+			<param-value>@dd.mission_name@</param-value>
+		</context-param>
+		<context-param> 
+			<param-name>dd.private_data_url</param-name>
+			<param-value>@dd.private_data_url@</param-value>
+		</context-param>
+		<context-param> 
+			<param-name>dd.public_data_url</param-name>
+			<param-value>@dd.public_data_url@</param-value>
+		</context-param>
+		<context-param> 
+			<param-name>dd.repo_top_level</param-name>
+			<param-value>@dd.repo_top_level@</param-value>
+		</context-param>
+		<context-param> 
+			<param-name>dd.smtp_host</param-name>
+			<param-value>@dd.smtp_host@</param-value>
+		</context-param>
+		<context-param> 
+			<param-name>dd.file_path_debug</param-name>
+			<param-value>@dd.file_path_debug@</param-value>
+		</context-param>
+
+		<context-param>
+			<param-name>dd.geo_ip_dat.resource_name</param-name>
+			<param-value>@dd.geo_ip_dat.resource_name@</param-value>
+		</context-param>
+		<context-param>
+			<param-name>dd.geo_ip_dat.dst_dir</param-name>
+			<param-value>@dd.geo_ip_dat.dst_dir@</param-value>
+		</context-param>
+
+	<servlet>
+		<display-name>TapServlet</display-name>
+		<servlet-name>TapServlet</servlet-name>
+		<servlet-class>esavo.sl.tap.actions.TapServlet</servlet-class>
+	    <load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+	    <servlet-name>TapServlet</servlet-name>
+	    <url-pattern>/tap/*</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<display-name>UploadServlet</display-name>
+		<servlet-name>UploadServlet</servlet-name>
+		<servlet-class>esavo.sl.services.actions.UploadServlet</servlet-class>
+
+	</servlet>
+	<servlet-mapping>
+	    <servlet-name>UploadServlet</servlet-name>
+	    <url-pattern>/Upload</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<display-name>ConvertToJsonServlet</display-name>
+		<servlet-name>ConvertToJsonServlet</servlet-name>
+		<servlet-class>esavo.sl.services.actions.ConvertToJsonServlet</servlet-class>
+		<init-param>
+			<param-name>keystorePath</param-name>
+			<param-value>@convert.json.keystore.path@</param-value>
+		</init-param>
+		<init-param>
+			<param-name>tmpFileDir</param-name>
+			<param-value>@convert.json.tmp.dir@</param-value>
+		</init-param>
+	</servlet>
+	
+	<servlet-mapping>
+	    <servlet-name>ConvertToJsonServlet</servlet-name>
+	    <url-pattern>/Transform</url-pattern>
+	</servlet-mapping>
+	
+	
+	<servlet>
+		<display-name>CrossMatchServlet</display-name>
+		<servlet-name>CrossMatchServlet</servlet-name>
+		<servlet-class>esavo.sl.services.actions.CrossMatchServlet</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+	    <servlet-name>CrossMatchServlet</servlet-name>
+	    <url-pattern>/crossMatch</url-pattern>
+	</servlet-mapping>
+	
+	
+	<servlet>
+		<display-name>IdManagerServlet</display-name>
+		<servlet-name>IdManagerServlet</servlet-name>
+		<servlet-class>esavo.sl.services.actions.IdManagerServlet</servlet-class>
+
+	</servlet>
+	<servlet-mapping>
+	    <servlet-name>IdManagerServlet</servlet-name>
+	    <url-pattern>/IdManager</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<display-name>SendToVOSpaceServlet</display-name>
+		<servlet-name>sendToVOSpace</servlet-name>
+		<servlet-class>esavo.sl.services.actions.SendToVOSpaceServlet</servlet-class>
+		<init-param>
+			<param-name>vospace.host.url</param-name>
+			<param-value>@vospace.host.url@</param-value>
+		</init-param>
+		<init-param>
+			<param-name>vospace.protocol</param-name>
+			<param-value>@vospace.protocol@</param-value>
+		</init-param>
+		<init-param>
+			<param-name>vospace.target</param-name>
+			<param-value>@vospace.target@</param-value>
+		</init-param>
+	</servlet>
+	<servlet-mapping>
+	    <servlet-name>sendToVOSpace</servlet-name>
+	    <url-pattern>/sendToVOSpace</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<display-name>LoginStatusServlet</display-name>
+		<servlet-name>LoginStatus</servlet-name>
+		<servlet-class>esavo.sl.services.actions.LoginStatusServlet</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+	    <servlet-name>LoginStatus</servlet-name>
+	    <url-pattern>/LoginStatus</url-pattern>
+	</servlet-mapping>
+		
+	<!--  Name resolver servlet -->
+	<servlet>
+		<servlet-name>target-resolver</servlet-name>
+		<servlet-class>esavo.sl.services.actions.TargetNameResolverServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>target-resolver</servlet-name>
+		<url-pattern>/servlet/target-resolver</url-pattern>
+	</servlet-mapping>
+	
+	
+	<servlet>
+		<servlet-name>target-resolution</servlet-name>
+		<servlet-class>esavo.sl.services.actions.TargetResolutionServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>target-resolution</servlet-name>
+		<url-pattern>/servlet/target-resolution</url-pattern>
+	</servlet-mapping>
+	
+	<!--  FileUpload Name resolver servlet -->
+	<servlet>
+		<servlet-name>target-list-file-upload</servlet-name>
+		<servlet-class>esavo.sl.services.actions.TargetListFileUploadServlet</servlet-class>
+		<init-param>
+			<param-name>esavo.sl.fileupload.FileUploadServletConfig.uploadDir</param-name>
+			<param-value>@target.file.upload.dir@</param-value>
+		</init-param>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>target-list-file-upload</servlet-name>
+		<url-pattern>/servlet/target-list-file-upload</url-pattern>
+	</servlet-mapping>
+	
+	<!-- Sessions manager servlet -->
+	<servlet>
+		<display-name>SessionManagerServlet</display-name>
+		<servlet-name>SessionManagerServlet</servlet-name>
+		<servlet-class>esavo.sl.services.actions.SessionManagerServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+	    <servlet-name>SessionManagerServlet</servlet-name>
+	    <url-pattern>/SessionManager</url-pattern>
+	</servlet-mapping>
+
+
+
+	<!-- Sessions manager servlet -->
+	<servlet>
+		<display-name>TableToolServlet</display-name>
+		<servlet-name>TableToolServlet</servlet-name>
+		<servlet-class>esavo.sl.services.actions.TableToolServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+	    <servlet-name>TableToolServlet</servlet-name>
+	    <url-pattern>/TableTool</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<display-name>PublicGroupServlet</display-name>
+		<servlet-name>PublicGroupServlet</servlet-name>
+		<servlet-class>esavo.sl.services.actions.PublicGroupServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+	    <servlet-name>PublicGroupServlet</servlet-name>
+	    <url-pattern>/PublicGroup</url-pattern>
+	</servlet-mapping>
+
+	
+	    <!-- DataRetrieval servlet -->
+	<servlet>
+		<display-name>DataRetrievalServlet</display-name>
+		<servlet-name>DataRetrievalServlet</servlet-name>
+		<servlet-class>esavo.sl.services.actions.DataRetrievalServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+	    <servlet-name>DataRetrievalServlet</servlet-name>
+	    <url-pattern>/data</url-pattern>
+	</servlet-mapping>
+	
+    <listener>
+        <listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
+    </listener>
+	<listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+   
+    
+    <!-- WhoAmI servlet -->
+	<servlet>
+		<display-name>WhoAmIServlet</display-name>
+		<servlet-name>WhoAmIServlet</servlet-name>
+		<servlet-class>esavo.sl.services.actions.WhoAmIServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+	    <servlet-name>WhoAmIServlet</servlet-name>
+	    <url-pattern>/WhoAmI</url-pattern>
+	</servlet-mapping>
+
+    <!-- WhoAmIConsumer servlet -->
+	<servlet>
+		<display-name>WhoAmIConsumerServlet</display-name>
+		<servlet-name>WhoAmIConsumerServlet</servlet-name>
+		<servlet-class>esavo.sl.services.actions.WhoAmIConsumerServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+	    <servlet-name>WhoAmIConsumerServlet</servlet-name>
+	    <url-pattern>/WhoAmIConsumer</url-pattern>
+	</servlet-mapping>
+	
+	<!-- CasLogin servlet -->
+	<servlet>
+		<display-name>CasLoginServlet</display-name>
+		<servlet-name>CasLoginServlet</servlet-name>
+		<servlet-class>esavo.sl.services.actions.CasServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+	    <servlet-name>CasLoginServlet</servlet-name>
+	    <url-pattern>/CasLogin</url-pattern>
+	</servlet-mapping>
+
+	<!-- CasLogout servlet -->
+	<servlet>
+		<display-name>CasLogoutServlet</display-name>
+		<servlet-name>CasLogoutServlet</servlet-name>
+		<servlet-class>esavo.sl.services.actions.CasServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+	    <servlet-name>CasLogoutServlet</servlet-name>
+	    <url-pattern>/CasLogout</url-pattern>
+	</servlet-mapping>
+    
+	<!-- Spring Security    -->
+	<!-- LDAP+CAS+PROXY --> 
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>
+            /WEB-INF/applicationContext-security_cas-proxy-ldap-basic.xml
+        </param-value>
+    </context-param>
+	<!-- LDAP+CAS --> 
+<!--     <context-param> -->
+<!--         <param-name>contextConfigLocation</param-name> -->
+<!--         <param-value> -->
+<!--             /WEB-INF/applicationContext-security_cas-ldap-basic.xml -->
+<!--         </param-value> -->
+<!--     </context-param> -->
+    <!-- LDAP only -->
+<!--     <context-param> -->
+<!--         <param-name>contextConfigLocation</param-name> -->
+<!--         <param-value> -->
+<!--             /WEB-INF/applicationContext-security_ldap.xml -->
+<!--         </param-value> -->
+<!--     </context-param> -->
+
+
+	<filter>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+<!-- 	<filter> -->
+<!-- 		<filter-name>characterEncodingFilter</filter-name> -->
+<!-- 		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class> -->
+<!-- 		<init-param> -->
+<!-- 			<param-name>encoding</param-name> -->
+<!-- 			<param-value>UTF-8</param-value> -->
+<!-- 		</init-param> -->
+<!-- 	</filter> -->
+<!-- 	<filter-mapping> -->
+<!-- 		<filter-name>characterEncodingFilter</filter-name> -->
+<!-- 		<url-pattern>/*</url-pattern> -->
+<!-- 	</filter-mapping> -->
+<!-- 	<listener> -->
+<!-- 		<listener-class>org.jasig.cas.client.session.SingleSignOutHttpSessionListener</listener-class> -->
+<!-- 	</listener> -->
+<!-- 	<filter> -->
+<!-- 		<filter-name>httpsCookieFilter</filter-name> -->
+<!-- 		<filter-class>esavo.security.HttpsCookieFilter</filter-class> -->
+<!-- 	</filter> -->
+<!-- 	<filter-mapping> -->
+<!-- 		<filter-name>httpsCookieFilter</filter-name> -->
+<!-- 		<url-pattern>/*</url-pattern> -->
+<!-- 	</filter-mapping> -->
+	
+</web-app>

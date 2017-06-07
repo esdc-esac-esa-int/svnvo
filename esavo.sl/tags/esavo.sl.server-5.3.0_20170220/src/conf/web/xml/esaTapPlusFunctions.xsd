@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://geadev.esac.esa.int/tap-dev/xml/VOFunctionsService/v1.0" 
+           xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+           xmlns:fs="http://geadev.esac.esa.int/tap-dev/xml/VOFunctionsService/v1.0" 
+           elementFormDefault="unqualified" attributeFormDefault="unqualified"
+           version="1.0">
+
+   <xs:annotation>
+      <xs:documentation>
+        An extension to the core resource metadata (VOResource) for describing functions.
+      </xs:documentation>
+   </xs:annotation>
+
+   <xs:complexType name="FunctionSet">
+      <xs:annotation>
+         <xs:documentation>
+           The set of functions hosted by a resource.
+         </xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element name="schema" type="fs:functionSchema" minOccurs="1" maxOccurs="unbounded"></xs:element>
+      </xs:sequence>
+      <xs:anyAttribute namespace="##other"/>
+   </xs:complexType>
+
+
+   <xs:complexType name="functionSchema">
+      <xs:annotation>
+         <xs:documentation>
+           A detailed description of a logically-related set of functions
+         </xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element name="name" type="xs:token" minOccurs="1" maxOccurs="1"></xs:element>
+         <xs:element name="function" type="fs:function" minOccurs="0" maxOccurs="unbounded"></xs:element>
+      </xs:sequence>
+      <xs:anyAttribute namespace="##other"/>
+   </xs:complexType>
+
+
+   <xs:complexType name="function">
+      <xs:sequence>
+         <xs:element name="name" type="xs:token" minOccurs="1" maxOccurs="1">
+            <xs:annotation>
+               <xs:documentation>the name of the function.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="description" type="xs:token" minOccurs="0" maxOccurs="1">
+            <xs:annotation>
+               <xs:documentation>a free-text description of the function's contents</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="signature" type="xs:token" minOccurs="1" maxOccurs="1">
+            <xs:annotation>
+               <xs:documentation>function signature</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="returnType" type="fs:dataType" minOccurs="1" maxOccurs="1">
+            <xs:annotation>
+               <xs:documentation>return type</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="argument" type="fs:argParam" minOccurs="0" maxOccurs="unbounded">
+            <xs:annotation>
+               <xs:documentation>a description of a function argument.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+      <xs:anyAttribute namespace="##other"/>
+   </xs:complexType>
+
+
+   <xs:complexType name="argParam">
+      <xs:annotation>
+          <xs:documentation>a description of a function argument.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element name="name" type="xs:token" minOccurs="1" maxOccurs="1">
+            <xs:annotation>
+               <xs:documentation>the name of the argument.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="description" type="xs:token" minOccurs="0" maxOccurs="1">
+            <xs:annotation>
+               <xs:documentation>a free-text description of the argument</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="type" type="fs:dataType" minOccurs="1" maxOccurs="1">
+             <xs:annotation>
+                <xs:documentation>a type of argument</xs:documentation>
+             </xs:annotation>
+          </xs:element>
+         <xs:element name="defaultValue" type="xs:token" minOccurs="0" maxOccurs="1">
+             <xs:annotation>
+                <xs:documentation>optional default value. Used when no value is provided to the argument.</xs:documentation>
+             </xs:annotation>
+          </xs:element>
+         <xs:element name="maxValue" type="xs:token" minOccurs="0" maxOccurs="1">
+             <xs:annotation>
+                <xs:documentation>optional maximum value (for checking).</xs:documentation>
+             </xs:annotation>
+          </xs:element>
+         <xs:element name="minValue" type="xs:token" minOccurs="0" maxOccurs="1">
+             <xs:annotation>
+                <xs:documentation>optional minimum value (for checking).</xs:documentation>
+             </xs:annotation>
+          </xs:element>
+      </xs:sequence>
+      <xs:anyAttribute namespace="##other"/>
+   </xs:complexType>
+
+
+   <xs:simpleType name="dataType">
+      <xs:annotation>
+         <xs:documentation>valid data types</xs:documentation>
+      </xs:annotation>
+      <xs:restriction base="xs:string">
+         <xs:enumeration value="integer"/>
+         <xs:enumeration value="double"/>
+         <xs:enumeration value="string"/>
+      </xs:restriction>
+   </xs:simpleType>
+
+</xs:schema>

@@ -1,0 +1,83 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:s="http://www.springframework.org/schema/security" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.springframework.org/schema/beans
+                  http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+                  http://www.springframework.org/schema/security
+                  http://www.springframework.org/schema/security/spring-security-4.0.xsd">
+                  
+<!-- 	This creates a session cookie always the first time the application is accessed. If the first access is
+		HTTP, a non-secure cookie is created. -->
+<!--     <http create-session="always"> -->
+    <s:http>
+       	<s:csrf disabled="true"/>
+    	<s:headers>
+			<s:frame-options policy="SAMEORIGIN"/>
+			<s:hsts disabled="true"/>
+		</s:headers>
+    
+        <s:form-login 
+            login-processing-url="/login" 
+            authentication-success-handler-ref="loginSuccessHandler" 
+            authentication-failure-handler-ref="loginFailureHandler"/> 
+        <s:logout logout-url="/logout" invalidate-session="true" success-handler-ref="logoutSuccessHandler"/>
+		<s:http-basic />
+    </s:http>
+
+
+<!--  	<bean id="httpsCookieFilter" class="esavo.sl.security.HttpsCookieFilter"/>       -->
+
+    <bean id="loginSuccessHandler" class="esavo.sl.security.authentication.LoginSuccessHandler" />
+    <bean id="loginFailureHandler" class="esavo.sl.security.authentication.LoginFailureHandler" />
+    <bean id="logoutSuccessHandler" class="esavo.sl.security.authentication.LogoutSuccessHandler" />
+    
+      
+    <s:ldap-server url="ldap://ldap.sciops.esa.int:389"/>
+    
+        <s:authentication-manager>
+        <s:authentication-provider ref="ldapProvider"/>
+    </s:authentication-manager>
+
+    <!-- This bean points at the embedded directory server created by the ldap-server element above  -->
+    <bean id="contextSource" class="org.springframework.security.ldap.DefaultSpringSecurityContextSource">
+        <constructor-arg value="ldap://ldap.sciops.esa.int:389"/>
+        <property name="userDn" value="cn=Euclid Applications Admin RO,ou=Special Users,o=esa.nl"/>
+        <property name="password" value="@ldap.pwd@"/>
+    </bean>
+
+    <bean id="userSearch" class="org.springframework.security.ldap.search.FilterBasedLdapUserSearch">
+	      <constructor-arg index="0" value="ou=people,o=esa.nl"/>
+	      <constructor-arg index="1" value="(uid={0})"/>
+	      <constructor-arg index="2" ref="contextSource" />
+    </bean>
+
+    <bean id="ldapProvider" class="org.springframework.security.ldap.authentication.LdapAuthenticationProvider">
+        <constructor-arg>
+            <bean class="org.springframework.security.ldap.authentication.BindAuthenticator">
+                <constructor-arg ref="contextSource" />
+                <property name="userSearch" ref="userSearch"/>
+            </bean>
+        </constructor-arg>
+        <constructor-arg>
+            <bean class="esavo.sl.security.authentication.CustomLdapAuthoritiesPopulator">
+                <constructor-arg ref="contextSource" />
+                <constructor-arg value="ou=people,o=esa.nl" />
+            </bean>
+        </constructor-arg>
+
+    </bean>
+    <bean id="userDetailsService" class="org.springframework.security.ldap.userdetails.LdapUserDetailsService">
+		<constructor-arg ref="userSearch" />
+	</bean>
+	
+		<!-- Black magic to make sync/async threads work with springsecuirty 4.0 in command line  -->
+	<bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+		<property name="targetClass" value="org.springframework.security.core.context.SecurityContextHolder" />
+		<property name="targetMethod" value="setStrategyName" />
+		<property name="arguments">
+			<list>
+				<value>MODE_INHERITABLETHREADLOCAL</value>
+			</list>
+		</property>
+	</bean>
+	
+</beans>   
